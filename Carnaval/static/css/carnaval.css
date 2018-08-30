@@ -1,0 +1,58 @@
+
+    
+.page-header {
+	background: url("https://res.cloudinary.com/emazecom/image/fetch/c_limit,a_ignore,f_png/https%3A%2F%2Fuserscontent2.emaze.com%2Fimages%2Fc9e9a8a4-7829-49b3-9fd3-5f7f936dafe0%2Fcf506d6998d68de01e9171f30fc4e287.gif");
+	padding: 20px 20px 40px 40px;
+	margin-top: 0;
+	
+	
+}
+
+
+#layer{
+    text-align: center;
+}
+
+#layer2{
+    text-align: center;
+}
+
+
+
+.navbar-nav.navbar-center {
+	top: -10%;
+	left: 2%;
+    position: absolute;
+    transform: translatex(0%);
+}
+
+
+*,*:after, *:before{
+	margin:0;
+	padding:0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#contenedor_carga{
+	background-color: rgba(250,240,245,0.9);
+	height: 10%;
+	widht: 10%;
+	position: fixed;
+	-webkit-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
+	z-index: 10000;
+}
+
+#carga{
+	border: 1px solid #ccc;
+	border-top-color: #F4266A;
+	border-top-style: groove;
+	height: 10px;
+	width:  10px;
+	border-radius:100%;
+}
+
+
