@@ -10,8 +10,21 @@
 
 <form id='form' method='get' action=''>
 {{form}}
-<p><input type='submit' value='Confirmar'/></p>
+<p><input type='submit' value='Confirmar' onclick="show3('layer')"/></p>
 </form>
+
+<div  id="layer" style="display:none;color: #000000;font-size: 0.5cm;" ><b>
+Su entrenamiento esta siendo procesado...
+Los resultados apareceran en 'Resultado del entrenamiento'</b>
+</div>
+
+<script type="text/javascript">
+function show3(bloq) {
+  obj = document.getElementById(bloq);
+  obj.style.display = (obj.style.display=='none') ? 'block' : 'block';
+  document.getElementById('form').style.visibility ='hidden'
+}
+</script>
 
 </body>
 </html>
