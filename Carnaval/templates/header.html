@@ -18,16 +18,61 @@
 	padding: 20px 20px 40px 40px;
 	margin-top: 0;
 	}
+	
+#layer{
+    text-align: center;
+}
+
+#layer2{
+    text-align: center;
+}
+
+.navbar-nav.navbar-center {
+	top: -10%;
+	left: 2%;
+    position: absolute;
+    transform: translatex(0%);
+}
+
+*,*:after, *:before{
+	margin:0;
+	padding:0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#contenedor_carga{
+	background-color: rgba(250,240,245,0.9);
+	height: 10%;
+	widht: 10%;
+	position: fixed;
+	-webkit-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
+	z-index: 10000;
+}
+
+#carga{
+	border: 1px solid #ccc;
+	border-top-color: #F4266A;
+	border-top-style: groove;
+	height: 10px;
+	width:  10px;
+	border-radius:100%;
+}
+
+
 </style>
 	
-}
+
 
 <body>
 
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;" role="navigation">
 	<div class="container-fluid">
 	    <div class="navbar-header">
-	            <a id="oculto1" class="navbar-brand" href="/"><img alt="Brand" src="/Carnaval/Carnaval/static/images/hola.png"></a>
+	            <a id="oculto1" class="navbar-brand" href="/"><img alt="Brand" href="https://image.ibb.co/ej609e/hola.png"></a>
 	    </div>
 	    <ul class="nav navbar-nav" style="font-weight: bold;">
 	            <li><a id="oculto" href="/populateLetras" role="button" onclick="show('layer')">Recoger Letras</a></li>
@@ -40,7 +85,7 @@
 
 
 <div id="layer" style="display:none;">
-<img id="layercarga" src="Carnaval\static\images\cargando.gif" />
+<img id="layercarga" href="https://image.ibb.co/nGBa9e/cargando.gif" />
 </div>
 
     <script type="text/javascript">
