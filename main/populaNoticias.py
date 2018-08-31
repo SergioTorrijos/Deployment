@@ -79,10 +79,11 @@ def guardar_bd():
         for continuacion in inicio.find_all('ul'):
             for noticia in continuacion.find_all('li'):
                 if len(noticia.get_text()) >20 and ((" Acontecimientos" not in noticia.get_text()) and (" Fecha desconocida" not in noticia.get_text()) and (" Fecha desconocido" not in noticia.get_text()) and (" Wikimedia" not in noticia.get_text()) and (" Fechas desconocidas" not in noticia.get_text()) and (" Fallecimientos" not in noticia.get_text()) and (" Lucha Libre Profesional" not in noticia.get_text()) and (" Lucha Libre Profesional" not in noticia.get_text()) and (" Ciencia y tecnolog" not in noticia.get_text()) and (" Astron" not in noticia.get_text()) and (" Deporte" not in noticia.get_text()) and (" Nacimientos" not in noticia.get_text()) and (" Internacionales" not in noticia.get_text()) and (" Videojuegos" not in noticia.get_text())):
-                    s = ''.join((c for c in unicodedata.normalize('NFD',unicode(noticia.get_text().strip())) if unicodedata.category(c) != 'Mn'))
-                    
-                    conn.execute("""INSERT INTO NOTICIAS (FECHA,TITULAR) VALUES (?,?)""",
-                                        (i,unicode(s)))
+                    if ("enero" in noticia.get_text()) or ("febrero" in noticia.get_text()) or ("marzo" in noticia.get_text()) or ("abril" in noticia.get_text()) or ("mayo" in noticia.get_text()) or ("junio" in noticia.get_text()) or ("julio" in noticia.get_text()) or ("agosto" in noticia.get_text()) or ("septiembre" in noticia.get_text()) or ("octubre" in noticia.get_text()) or ("noviembre" in noticia.get_text()) or ("diciembre" in noticia.get_text()): 
+						s = ''.join((c for c in unicodedata.normalize('NFD',unicode(noticia.get_text().strip())) if unicodedata.category(c) != 'Mn'))
+						
+						conn.execute("""INSERT INTO NOTICIAS (FECHA,TITULAR) VALUES (?,?)""",
+											(i,unicode(s)))
     conn.commit()
     conn.close()
     
