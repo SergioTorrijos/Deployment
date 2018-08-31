@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="{% static 'css/carnaval.css' %}" />
+<link href="../static/css/carnaval.css" rel="stylesheet" type="text/css">
 
 
 
@@ -16,20 +16,20 @@
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;" role="navigation">
 	<div class="container-fluid">
 	    <div class="navbar-header">
-	            <a id="oculto1" class="navbar-brand" href="/"><img alt="Brand" src="static/images/hola.png"></a>
+	            <a id="oculto1" class="navbar-brand" href="/"><img alt="Brand" src="../static/images/hola.png"></a>
 	    </div>
 	    <ul class="nav navbar-nav" style="font-weight: bold;">
 	            <li><a id="oculto" href="/populateLetras" role="button" onclick="show('layer')">Recoger Letras</a></li>
 	        	<li><a id="oculto2" href="/populateNoticias" role="button" onclick="show2('layer')">Recoger Noticias</a></li>
 	        	<li><a id="oculto3" href="/entrenarDatos" role="button" onclick="show3('layer')">Entrenar Datos</a></li>
-	        	
+	        	<li><a id="oculto4" href="/resultadoEntrenarDatos" role="button" onclick="show3('layer')">Resultado del entrenamiento</a></li>
 	    </ul>
     </div>
 </nav>
 
 
 <div id="layer" style="display:none;">
-<img id="layercarga" src="static/images/cargando.gif" />
+<img id="layercarga" src="../static/images/cargando.gif" />
 </div>
 
     <script type="text/javascript">
@@ -40,6 +40,7 @@
 	  document.getElementById('oculto').style.visibility ='hidden'
 	  document.getElementById('oculto2').style.visibility ='hidden'
 	  document.getElementById('oculto3').style.visibility ='hidden'
+ 	  document.getElementById('oculto4').style.visibility ='hidden'
 	}
 	</script>
 	
@@ -51,6 +52,7 @@
 	  document.getElementById('oculto').style.visibility ='hidden'
 	  document.getElementById('oculto2').style.visibility ='hidden'
 	  document.getElementById('oculto3').style.visibility ='hidden'
+	  document.getElementById('oculto4').style.visibility ='hidden'
 	}
 	</script>
 	
