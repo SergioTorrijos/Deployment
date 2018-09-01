@@ -128,7 +128,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 	'djcelery',
     'main',
-	'djcelery',
 )
 
 # A sample logging configuration. The only tangible logging

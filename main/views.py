@@ -40,7 +40,7 @@ def entrenarDatos(request):
     if request.method=='GET':
         form = UserForm(request.GET, request.FILES)
         if form.is_valid():
-            guardarEntrenamiento.delay(str(form.cleaned_data['id']))
+            guardarEntrenamiento(str(form.cleaned_data['id']))
     else:
         form=UserForm()
     return render_to_response('entrenarDatos.html', {'form':form}, context_instance=RequestContext(request))

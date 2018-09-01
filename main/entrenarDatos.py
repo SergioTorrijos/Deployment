@@ -14,7 +14,6 @@ import gensim
 from nltk import RegexpTokenizer
 from nltk.corpus import stopwords
 import sqlite3
-from Carnaval.celery import app
 
 tokenizer = RegexpTokenizer(r'\w+')
 stopword_set = set(stopwords.words('spanish'))
@@ -29,7 +28,6 @@ def nlp_clean(data):
     return new_data
 
 #Método principal del Doc2Vec
-@app.task
 def guardarEntrenamiento(fechaPasada):
     
     
