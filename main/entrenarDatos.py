@@ -60,7 +60,7 @@ def guardarEntrenamiento(fechaPasada):
             letrasNoticias= []
             letrasNoticias.append(j[0])
             
-            cursorNoticias = conn.execute('''SELECT TITULAR FROM NOTICIAS WHERE FECHA='''+fechaPasada+''' or FECHA='''+ str(int(fechaPasada) - 1))
+            cursorNoticias = conn.execute('''SELECT TITULAR FROM NOTICIAS WHERE FECHA='''+fechaPasada)
             for i in cursorNoticias.fetchall():
                 letrasNoticias.append(i[0])
          
@@ -72,7 +72,7 @@ def guardarEntrenamiento(fechaPasada):
             model = gensim.models.Doc2Vec(vector_size=15, window=2, min_count=1, workers=4)
             model.build_vocab(it)
             
-            iterator_size=100
+            iterator_size=10
             #training of model
             for epoch in range(iterator_size):
                 print 'iteration '+str(epoch+1)
