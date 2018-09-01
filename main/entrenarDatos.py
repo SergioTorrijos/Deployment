@@ -54,9 +54,10 @@ def guardarEntrenamiento(fechaPasada):
         for j in cursorLetras.fetchall():
             
             print suma
+            print j[0]
+			
 			if suma == 24:
 				break
-            print j[0]
             suma+=1
             
             letrasNoticias= []
@@ -71,10 +72,10 @@ def guardarEntrenamiento(fechaPasada):
             it = LabeledLineSentence(letras_fin, letrasNoticias)
             
     #         model = gensim.models.Doc2Vec( vector_size=1, min_count=1, alpha=0.05, min_alpha=0.00025, dm=2)
-            model = gensim.models.Doc2Vec(vector_size=15, window=2, min_count=1, workers=10)
+            model = gensim.models.Doc2Vec(vector_size=15, window=2, min_count=1, workers=4)
             model.build_vocab(it)
             
-            iterator_size=3
+            iterator_size=2
             #training of model
             for epoch in range(iterator_size):
                 print 'iteration '+str(epoch+1)
