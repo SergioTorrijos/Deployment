@@ -157,8 +157,15 @@ def guardarEntrenamiento(fechaPasada):
         res= []
         res.append("No se encuentran datos para la fecha seleccionada")
         return res
-    
-    
+
+def resultadoEntrenamiento():
+    conn = sqlite3.connect('carnaval.db')
+    cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
+    res=[]
+    for registro in cursor:
+        res.append(registro[0])   
+    return res		
+	
     
 class LabeledLineSentence(object):
     def __init__(self, doc_list, labels_list):
