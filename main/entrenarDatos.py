@@ -45,19 +45,20 @@ def guardarEntrenamiento(fechaPasada):
         
         cursorLetras= conn.execute('''SELECT LETRA FROM LETRAS WHERE FECHA ='''+fechaPasada)
         letrasNoticias = []
-        suma=0
+        
         noticiasSeleccionadas = []
         noticiasSeleccionadasNombre = []
         noticiasRepetidas = []
         noticiasRepetidasFin = []
-        
+        suma=0
+		
         for j in cursorLetras.fetchall():
             
             print suma
             print j[0]
 			
-			if suma == 24:
-				break
+			if suma == 3:
+				break;
             suma+=1
             
             letrasNoticias= []
