@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^populateLetras', populateDBLetras, name='populateDBLetras'),
     url(r'^populateNoticias',populateDBNoticias, name='populateDBNoticias'),
-    url(r'^entrenarDatos',entrenarDatos, name='entrenarDatos,
+    url(r'^entrenarDatos',entrenarDatos, name='entrenarDatos'),
     url(r'^resultadoEntrenarDatos',resultadoEntrenarDatos, name='ResultadoEntrenarDatos'),]
 
