@@ -54,61 +54,61 @@ def guardarEntrenamiento(fechaPasada):
 		
         for j in cursorLetras.fetchall():
             
-            print suma
-            print j[0]
-			
-			if suma == 3:
-				break;
-            suma+=1
-            
-            letrasNoticias= []
-            letrasNoticias.append(j[0])
-            
-            cursorNoticias = conn.execute('''SELECT TITULAR FROM NOTICIAS WHERE FECHA='''+fechaPasada)
-            for i in cursorNoticias.fetchall():
-                letrasNoticias.append(i[0])
-         
-            letras_fin = nlp_clean(letrasNoticias)
-            
-            it = LabeledLineSentence(letras_fin, letrasNoticias)
-            
-    #         model = gensim.models.Doc2Vec( vector_size=1, min_count=1, alpha=0.05, min_alpha=0.00025, dm=2)
-            model = gensim.models.Doc2Vec(vector_size=15, window=2, min_count=1, workers=4)
-            model.build_vocab(it)
-            
-            iterator_size=2
-            #training of model
-            for epoch in range(iterator_size):
-                print 'iteration '+str(epoch+1)
-                model.train(it,total_examples=model.corpus_count,epochs=model.epochs)
-                model.alpha -= 0.00002
-                model.min_alpha = model.alpha
-             
-            #saving the created model
-            model.save('doc2vec.model')
-            
-            
-            #loading the model
-            d2v_model = gensim.models.doc2vec.Doc2Vec.load('doc2vec.model')
-            model.delete_temporary_training_data(keep_doctags_vectors=True, keep_inference=True)
-            #start testing
-            #to get most similar document with similarity scores using document-index
-            similar_doc = d2v_model.docvecs.most_similar(0) 
-            print similar_doc
-            for index in similar_doc:
-                
-                noticiasSeleccionadas.append(index)#Noticias con vectores
-                
-                if index[0] in noticiasSeleccionadasNombre: #Se comprueba si se repite alguna noticia, si no se repite se añade
-                    if index[0] not in noticiasRepetidas: #Vemos que noticias se repiten tras el entrenamiento, si no esta en noticias repetidas se añade
-                        noticiasRepetidas.append(index[0])
-                         
-                    
-                    #print noticiasRepetidas
-                noticiasSeleccionadasNombre.append(index[0])
-            
-            #print "NOTICIA REPETIDA !!!!!"
-            #print noticiasRepetidas
+			if suma != 19:
+				print suma
+				print j[0]
+				
+				
+				suma+=1
+				
+				letrasNoticias= []
+				letrasNoticias.append(j[0])
+				
+				cursorNoticias = conn.execute('''SELECT TITULAR FROM NOTICIAS WHERE FECHA='''+fechaPasada)
+				for i in cursorNoticias.fetchall():
+					letrasNoticias.append(i[0])
+			 
+				letras_fin = nlp_clean(letrasNoticias)
+				
+				it = LabeledLineSentence(letras_fin, letrasNoticias)
+				
+		#         model = gensim.models.Doc2Vec( vector_size=1, min_count=1, alpha=0.05, min_alpha=0.00025, dm=2)
+				model = gensim.models.Doc2Vec(vector_size=15, window=2, min_count=1, workers=4)
+				model.build_vocab(it)
+				
+				iterator_size=2
+				#training of model
+				for epoch in range(iterator_size):
+					print 'iteration '+str(epoch+1)
+					model.train(it,total_examples=model.corpus_count,epochs=model.epochs)
+					model.alpha -= 0.00002
+					model.min_alpha = model.alpha
+				 
+				#saving the created model
+				model.save('doc2vec.model')
+				
+				
+				#loading the model
+				d2v_model = gensim.models.doc2vec.Doc2Vec.load('doc2vec.model')
+				model.delete_temporary_training_data(keep_doctags_vectors=True, keep_inference=True)
+				#start testing
+				#to get most similar document with similarity scores using document-index
+				similar_doc = d2v_model.docvecs.most_similar(0) 
+				print similar_doc
+				for index in similar_doc:
+					
+					noticiasSeleccionadas.append(index)#Noticias con vectores
+					
+					if index[0] in noticiasSeleccionadasNombre: #Se comprueba si se repite alguna noticia, si no se repite se añade
+						if index[0] not in noticiasRepetidas: #Vemos que noticias se repiten tras el entrenamiento, si no esta en noticias repetidas se añade
+							noticiasRepetidas.append(index[0])
+							 
+						
+						#print noticiasRepetidas
+					noticiasSeleccionadasNombre.append(index[0])
+				
+				#print "NOTICIA REPETIDA !!!!!"
+				#print noticiasRepetidas
             
             
         controlRepetidasFin =[]
