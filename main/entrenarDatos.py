@@ -140,6 +140,7 @@ def guardarEntrenamiento(fechaPasada):
                 conn.execute("""INSERT INTO ENTRENAMIENTO (NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?)""",
                             (fi[0],"0",fi[1]))
             
+
             conn.commit()
             conn.close()
             
@@ -152,6 +153,15 @@ def guardarEntrenamiento(fechaPasada):
                 
             conn.commit()
             conn.close()
+		
+		conn = sqlite3.connect('carnaval.db')
+		cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
+		res=[]
+		for registro in cursor:
+			res.append(registro[0])
+		conn.commit()
+        conn.close()
+		return res
             
     except:
         res= []
@@ -160,11 +170,7 @@ def guardarEntrenamiento(fechaPasada):
 
 def resultadoEntrenamiento():
     conn = sqlite3.connect('carnaval.db')
-    cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
-    res=[]
-    for registro in cursor:
-        res.append(registro[0])   
-    return res		
+    	
 	
     
 class LabeledLineSentence(object):
