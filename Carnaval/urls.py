@@ -1,7 +1,7 @@
 #encoding:utf-8
 from django.conf.urls import *
 from django.contrib import admin
-from main.views import index, populateDBLetras, populateDBNoticias, entrenarDatos,resultadoEntrenarDatos
+from main.views import index, populateDBLetras, populateDBNoticias, entrenarDatos, resultadoEntrenarDatos
 
 admin.autodiscover()
 

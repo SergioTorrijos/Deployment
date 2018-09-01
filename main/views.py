@@ -27,7 +27,7 @@ def populateDBNoticias(request):
     numeroNoticias =str(cursor.fetchone()[0])
     return render_to_response('populateNoticias.html',{'numeroNoticias':numeroNoticias},context_instance=RequestContext(request))
 
-def resultadoEntrenamiento(request):
+def resultadoEntrenarDatos(request):
 	conn = sqlite3.connect('carnaval.db')
 	cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
 	res=[]
