@@ -7,7 +7,6 @@ from main.forms import UserForm
 import sqlite3
 from django.template.context import RequestContext
 from botocore.vendored.requests.api import request
-from tasks import guardarEntrenamiento
     
 #  CONJUNTO DE VISTAS
 
