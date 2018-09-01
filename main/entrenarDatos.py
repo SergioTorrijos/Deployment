@@ -54,15 +54,15 @@ def guardarEntrenamiento(fechaPasada):
         for j in cursorLetras.fetchall():
             
             print suma
-            print unicode(j[0])
+            print j[0]
             suma+=1
             
             letrasNoticias= []
-            letrasNoticias.append(unicode(j[0]))
+            letrasNoticias.append(j[0])
             
             cursorNoticias = conn.execute("SELECT TITULAR FROM NOTICIAS WHERE FECHA="+fechaPasada+" or FECHA="+ str(int(fechaPasada) - 1))
             for i in cursorNoticias.fetchall():
-                letrasNoticias.append(unicode(i[0]))
+                letrasNoticias.append(i[0])
          
             letras_fin = nlp_clean(letrasNoticias)
             
