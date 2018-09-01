@@ -75,7 +75,7 @@ def guardarEntrenamiento(fechaPasada):
             iterator_size=100
             #training of model
             for epoch in range(iterator_size):
-    #             print 'iteration '+str(epoch+1)
+                print 'iteration '+str(epoch+1)
                 model.train(it,total_examples=model.corpus_count,epochs=model.epochs)
                 model.alpha -= 0.00002
                 model.min_alpha = model.alpha
