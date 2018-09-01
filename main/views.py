@@ -32,6 +32,7 @@ def entrenarDatos(request):
         form = UserForm(request.GET, request.FILES)
         if form.is_valid():
             guardarEntrenamiento(str(form.cleaned_data['id']))
+			
 			conn = sqlite3.connect('carnaval.db')
 			cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
 			res=[]
