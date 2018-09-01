@@ -153,15 +153,6 @@ def guardarEntrenamiento(fechaPasada):
                 
             conn.commit()
             conn.close()
-		
-		conn = sqlite3.connect('carnaval.db')
-		cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
-		res=[]
-		for registro in cursor:
-			res.append(registro[0])
-		conn.commit()
-        conn.close()
-		return res
             
     except:
         res= []
