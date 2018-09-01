@@ -2,7 +2,7 @@ from main.models import UserInformation
 from django.shortcuts import render_to_response, get_object_or_404
 from main.populaLetras import populateDatabaseLetras
 from main.populaNoticias import populateDatabaseNoticias
-from main.entrenarDatos import entrenamientoDatos
+from main.entrenarDatos import guardarEntrenamiento
 from main.forms import UserForm
 import sqlite3
 from django.template.context import RequestContext
@@ -40,7 +40,7 @@ def entrenarDatos(request):
     if request.method=='GET':
         form = UserForm(request.GET, request.FILES)
         if form.is_valid():
-            guardarEntrenamiento(str(form.cleaned_data['id']))
+            guardarEntrenamiento.delay(str(form.cleaned_data['id']))
     else:
         form=UserForm()
     return render_to_response('entrenarDatos.html', {'form':form}, context_instance=RequestContext(request))
