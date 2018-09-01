@@ -72,7 +72,7 @@ def guardarEntrenamiento(fechaPasada):
             model = gensim.models.Doc2Vec(vector_size=15, window=2, min_count=1, workers=4)
             model.build_vocab(it)
             
-            iterator_size=10
+            iterator_size=3
             #training of model
             for epoch in range(iterator_size):
                 print 'iteration '+str(epoch+1)
