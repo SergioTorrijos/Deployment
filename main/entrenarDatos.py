@@ -54,7 +54,7 @@ def guardarEntrenamiento(fechaPasada):
 		
         for j in cursorLetras.fetchall():
             
-			if suma != 19:
+			if suma != 24:
 				print suma
 				print j[0]
 				
