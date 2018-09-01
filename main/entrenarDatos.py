@@ -35,7 +35,7 @@ def guardarEntrenamiento(fechaPasada):
     
     conn = sqlite3.connect('carnaval.db')
     conn.text_factory = str  # para evitar problemas con el conjunto de caracteres que maneja la BD
-    conn.execute("DROP TABLE IF EXISTS ENTRENAMIENTO")
+    conn.execute('''DROP TABLE IF EXISTS ENTRENAMIENTO''')
      
     conn.execute('''CREATE TABLE ENTRENAMIENTO
        (ID INTEGER PRIMARY KEY  AUTOINCREMENT,
@@ -45,7 +45,7 @@ def guardarEntrenamiento(fechaPasada):
     
     try:
         
-        cursorLetras= conn.execute("SELECT LETRA FROM LETRAS WHERE FECHA ="+fechaPasada)
+        cursorLetras= conn.execute('''SELECT LETRA FROM LETRAS WHERE FECHA ='''+fechaPasada)
         letrasNoticias = []
         suma=0
         noticiasSeleccionadas = []
@@ -62,7 +62,7 @@ def guardarEntrenamiento(fechaPasada):
             letrasNoticias= []
             letrasNoticias.append(j[0])
             
-            cursorNoticias = conn.execute("SELECT TITULAR FROM NOTICIAS WHERE FECHA="+fechaPasada+" or FECHA="+ str(int(fechaPasada) - 1))
+            cursorNoticias = conn.execute('''SELECT TITULAR FROM NOTICIAS WHERE FECHA='''+fechaPasada+''' or FECHA='''+ str(int(fechaPasada) - 1))
             for i in cursorNoticias.fetchall():
                 letrasNoticias.append(i[0])
          
