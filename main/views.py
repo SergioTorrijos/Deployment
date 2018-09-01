@@ -41,8 +41,6 @@ def entrenarDatos(request):
         form = UserForm(request.GET, request.FILES)
         if form.is_valid():
             entrenamientoDatos(str(form.cleaned_data['id']))
-            
-            render_to_response('entrenarDatos.html', {'form':form}, context_instance=RequestContext(request))
     else:
         form=UserForm()
     return render_to_response('entrenarDatos.html', {'form':form}, context_instance=RequestContext(request))
