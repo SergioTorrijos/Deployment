@@ -29,8 +29,11 @@ def populateDBNoticias(request):
 
 def resultadoEntrenarDatos(request):
 	try:
+		print "ENTRA!!!!!!!!!!"
 		conn = sqlite3.connect('carnaval.db')
+		print "ENTRA 1 !!!!"
 		cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
+		print "ENTRA 1 !!!!"
 		res=[]
 		fecha=""
 		for registro in cursor:
@@ -40,9 +43,11 @@ def resultadoEntrenarDatos(request):
 		return render_to_response('entreno.html', {'noticiasssss':res , 'fecha':fecha}, context_instance=RequestContext(request))		
 		
 	except:
+		print "NO ENTRA!!!!!"
 		res=[]
 		fecha=""
 		return render_to_response('entreno.html', {'noticiasssss':res , 'fecha':fecha}, context_instance=RequestContext(request))
+		
 def entrenarDatos(request):
     if request.method=='GET':
         form = UserForm(request.GET, request.FILES)
