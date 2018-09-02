@@ -36,7 +36,7 @@ def resultadoEntrenarDatos(request):
 		res.append(registro[1])
 		fecha=registro[0]
 		
-	return render_to_response('entreno.html', {'noticiasssss':res ; 'fecha':fecha}, context_instance=RequestContext(request))
+	return render_to_response('entreno.html', {'noticiasssss':res , 'fecha':fecha}, context_instance=RequestContext(request))
 	
 def entrenarDatos(request):
     if request.method=='GET':
