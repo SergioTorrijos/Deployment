@@ -5,13 +5,10 @@
 <body>
 {% include 'header.html' %}
 
-<div  id="layer" style="font-size: 0.5cm;"  >
-<b>
-Datos entrenados para la fecha {{fecha}}</b>
-</div
-
 <ul>
 	{% for dato in noticiasssss %}
+	<b>Datos entrenados para la fecha {{fecha}}</b>
+	<br>
 	<li>- {{dato}}</li>
 	<li></li>
 	{% empty %}
