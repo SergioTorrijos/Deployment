@@ -19,50 +19,20 @@ def extraer_fechas():
     for i in m:
         a= i.find('a')
         if (len(a.get_text()) ==4 and (a.get_text()).isdigit()):
-			if int(a.get_text()) > 2014:
+			if int(a.get_text()) > 2017:
 				res.append(str(a.get_text()))
     
     return res
 
-def extraer_fechas_Noticias():
-    conn = sqlite3.connect('carnaval.db')
-    cursor = conn.cursor()
-   
-    #Asi se ve si en la base de datos existe la columna FECHA o la tabla LETRAS
-    try :
-        #Es más rapido coger los datos de la base de datos que hacer Scrapping, por eso usamos este primer método
-        cursor.execute("SELECT distinct FECHA FROM LETRAS")
-        res=[]
-        for registro in cursor:
-            res.append(str(registro[0]))
-        
-        #Si en la base de datos hay letras, coge las fechas guardadas en la base de datos, si las hubiera
-        if res != []: 
-            res = res
-            
-        #Si en la base de datos no hay fechas aún, coge los años de la misma manera que se realiza a la hora de coger las letras
-        #Este metodo tarda más, pero evita errores en la pagina.
-        else: 
-            res = extraer_fechas()
-    
-    #Si no existe alguna de las anteriores, se usa el método habitual para obtener las fechas 
-    except :
-        res = extraer_fechas()
-    
-    return res
 
 def guardar_bd():
     
     conn = sqlite3.connect('carnaval.db')
     conn.text_factory = str  # para evitar problemas con el conjunto de caracteres que maneja la BD
-    conn.execute("DROP TABLE IF EXISTS NOTICIAS")
+    conn.execute("DELETE FROM NOTICIAS WHERE FECHA=" + "2018")
      
-    conn.execute('''CREATE TABLE NOTICIAS
-       (ID INTEGER PRIMARY KEY  AUTOINCREMENT,
-       FECHA           TEXT    NOT NULL,
-       TITULAR           TEXT    NOT NULL);''')
     
-    l=extraer_fechas_Noticias()
+    l=extraer_fechas()
     for i in l:    
         print i
         

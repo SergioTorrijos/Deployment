@@ -19,7 +19,7 @@ def extraer_fechas():
     for i in m:
         a= i.find('a')
         if (len(a.get_text()) ==4 and (a.get_text()).isdigit()):
-			if int(a.get_text()) > 2014:
+			if int(a.get_text()) > 2017:
 				res.append(str(a.get_text()))
     
     return res
@@ -31,14 +31,8 @@ def guardar_bd():
     
     conn = sqlite3.connect('carnaval.db')
     conn.text_factory = str  # para evitar problemas con el conjunto de caracteres que maneja la BD
-    conn.execute("DROP TABLE IF EXISTS LETRAS")
+    conn.execute("DELETE FROM LETRAS WHERE FECHA=" + "2018")
      
-    conn.execute('''CREATE TABLE LETRAS
-       (ID INTEGER PRIMARY KEY  AUTOINCREMENT,
-       FECHA           TEXT    NOT NULL,
-       AUTOR           TEXT    NOT NULL,
-       GRUPO           TEXT    NOT NULL,
-       LETRA           TEXT    NOT NULL);''')
     
     l=extraer_fechas()
     for i in l:    
