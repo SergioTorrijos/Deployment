@@ -28,19 +28,21 @@ def populateDBNoticias(request):
     return render_to_response('populateNoticias.html',{'numeroNoticias':numeroNoticias},context_instance=RequestContext(request))
 
 def resultadoEntrenarDatos(request):
-	
-	conn = sqlite3.connect('carnaval.db')
-	cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
-	res=[]
-	fecha=0
-	for registro in cursor:
-		res.append(registro[1])
-		fecha=registro[0]
-	
-	return render_to_response('entreno.html', {'noticiasssss':res , 'fecha':fecha}, context_instance=RequestContext(request))		
+	try:
+		conn = sqlite3.connect('carnaval.db')
+		cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
+		res=[]
+		fecha=""
+		for registro in cursor:
+			res.append(registro[1])
+			fecha=registro[0]
+
+		return render_to_response('entreno.html', {'noticiasssss':res , 'fecha':fecha}, context_instance=RequestContext(request))		
 		
-	
-	
+	except:
+		res=[]
+		fecha=""
+		return render_to_response('entreno.html', {'noticiasssss':res , 'fecha':fecha}, context_instance=RequestContext(request))
 def entrenarDatos(request):
     if request.method=='GET':
         form = UserForm(request.GET, request.FILES)
