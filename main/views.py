@@ -33,8 +33,8 @@ def resultadoEntrenarDatos(request):
 		conn = sqlite3.connect('carnaval.db')
 		print "ENTRA 1 !!!!"
 		cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
-		cursor2 = conn.execute("SELECT * FECHA FROM ENTRENAMIENTO")
-		print "ENTRA 1 !!!!"
+		cursor2 = conn.execute("SELECT distinct FECHA FROM ENTRENAMIENTO")
+		print "ENTRA 2 !!!!"
 		res=[]
 		fecha=""
 		for registro in cursor:
