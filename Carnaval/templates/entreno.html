@@ -6,19 +6,18 @@
 {% include 'header.html' %}
 
 <ul>
-	{% for dato in noticiasssss %}
+	{% if fecha != ""%}
 	<li style="font-size: 0.5cm;"><b>Datos entrenados para la fecha {{fecha}}</b></li>
-	{% empty %}
+	{% endif %}
 	<li></li>
-	{% endfor %}
-	<li></li>
+	
 	<li></li>
 	
 	{% for dato in noticiasssss %}
 	<li>- {{dato}}</li>
 	<li></li>
 	{% empty %}
-	<li style="font-size: 0.5cm;"><b>No hay Letras o noticias registradas en esa fecha </b></li>
+	<li style="font-size: 0.5cm;"><b> 	No hay Letras o noticias registradas en esa fecha </b></li>
 	{% endfor %}
 </ul>
 
