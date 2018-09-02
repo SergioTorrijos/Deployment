@@ -19,7 +19,7 @@ def extraer_fechas():
     for i in m:
         a= i.find('a')
         if (len(a.get_text()) ==4 and (a.get_text()).isdigit()):
-			if int(a.get_text()) > 2014:
+			if int(a.get_text()) > 2013:
 				res.append(str(a.get_text()))
     
     return res
