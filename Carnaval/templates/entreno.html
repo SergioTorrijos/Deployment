@@ -6,10 +6,13 @@
 {% include 'header.html' %}
 
 <ul>
-
-	<b>Datos entrenados para la fecha {{fecha}}</b>
-	<br>
-	<br>
+	{% for dato in noticiasssss %}
+	<li style="font-size: 0.5cm;"><b>Datos entrenados para la fecha {{fecha}}</b></li>
+	{% empty %}
+	<li></li>
+	{% endfor %}
+	<li></li>
+	<li></li>
 	
 	{% for dato in noticiasssss %}
 	<li>- {{dato}}</li>
