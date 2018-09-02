@@ -37,6 +37,7 @@ def guardarEntrenamiento(fechaPasada):
      
     conn.execute('''CREATE TABLE ENTRENAMIENTO
        (ID INTEGER PRIMARY KEY  AUTOINCREMENT,
+	   FECHA			TEXT NOT NULL,
        NOTICIA           TEXT    NOT NULL,
        REPETICIONES           TEXT    NOT NULL,
        VECTOR           TEXT    NOT NULL);''')
@@ -64,7 +65,7 @@ def guardarEntrenamiento(fechaPasada):
 				letrasNoticias= []
 				letrasNoticias.append(j[0])
 				
-				cursorNoticias = conn.execute('''SELECT TITULAR FROM NOTICIAS WHERE FECHA='''+fechaPasada)
+				cursorNoticias = conn.execute('''SELECT TITULAR FROM NOTICIAS WHERE FECHA='''+str(int(fechaPasada) - 1))
 				for i in cursorNoticias.fetchall():
 					letrasNoticias.append(i[0])
 			 
@@ -132,13 +133,14 @@ def guardarEntrenamiento(fechaPasada):
             fin = noticiasSeleccionadas[:(5-len(noticiasRepetidasFin))]
             #Noticias que se repiten junto a sus repeticiones
             for f in noticiasRepetidasFin:
-                conn.execute("""INSERT INTO ENTRENAMIENTO (NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?)""",
-                            (f[0],f[1],"0"))
+				fecha = int(fechaPasada) +1
+                conn.execute("""INSERT INTO ENTRENAMIENTO (FECHA,NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?,?)""",
+                            (fechaPasada,str(fecha),f[1],f[2],"0"))
                 
             #Noticias que no se repiten junto a su vector
             for fi in fin:
-                conn.execute("""INSERT INTO ENTRENAMIENTO (NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?)""",
-                            (fi[0],"0",fi[1]))
+                conn.execute("""INSERT INTO ENTRENAMIENTO (FECHA,NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?,?)""",
+                            (fechaPasada,fi[1],"0",fi[2]))
             
 
             conn.commit()
@@ -148,8 +150,8 @@ def guardarEntrenamiento(fechaPasada):
         else:
             #Noticias repetidas junto a las veces que se repite
             for f in noticiasRepetidasFin:
-                conn.execute("""INSERT INTO ENTRENAMIENTO (NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?)""",
-                            (f[0],f[1],"0"))
+                conn.execute("""INSERT INTO ENTRENAMIENTO (FECHA,NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?,?)""",
+                            (fechaPasada,f[1],f[2],"0"))
                 
             conn.commit()
             conn.close()

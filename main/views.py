@@ -31,10 +31,12 @@ def resultadoEntrenarDatos(request):
 	conn = sqlite3.connect('carnaval.db')
 	cursor = conn.execute("SELECT distinct NOTICIA FROM ENTRENAMIENTO")
 	res=[]
+	fecha=0
 	for registro in cursor:
-		res.append(registro[0])
+		res.append(registro[1])
+		fecha=registro[0]
 		
-	return render_to_response('entreno.html', {'noticiasssss':res}, context_instance=RequestContext(request))
+	return render_to_response('entreno.html', {'noticiasssss':res ; 'fecha':fecha}, context_instance=RequestContext(request))
 	
 def entrenarDatos(request):
     if request.method=='GET':
