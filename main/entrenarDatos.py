@@ -133,14 +133,13 @@ def guardarEntrenamiento(fechaPasada):
             fin = noticiasSeleccionadas[:(5-len(noticiasRepetidasFin))]
             #Noticias que se repiten junto a sus repeticiones
             for f in noticiasRepetidasFin:
-				fecha = int(fechaPasada) +1
                 conn.execute("""INSERT INTO ENTRENAMIENTO (FECHA,NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?,?)""",
-                            (fechaPasada,str(fecha),f[1],f[2],"0"))
+                            (fechaPasada,f[0],f[1],"0"))
                 
             #Noticias que no se repiten junto a su vector
             for fi in fin:
                 conn.execute("""INSERT INTO ENTRENAMIENTO (FECHA,NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?,?)""",
-                            (fechaPasada,fi[1],"0",fi[2]))
+                            (fechaPasada,fi[0],"0",fi[1]))
             
 
             conn.commit()
@@ -151,7 +150,7 @@ def guardarEntrenamiento(fechaPasada):
             #Noticias repetidas junto a las veces que se repite
             for f in noticiasRepetidasFin:
                 conn.execute("""INSERT INTO ENTRENAMIENTO (FECHA,NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?,?)""",
-                            (fechaPasada,f[1],f[2],"0"))
+                            (fechaPasada,f[0],f[1],"0"))
                 
             conn.commit()
             conn.close()
