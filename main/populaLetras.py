@@ -30,16 +30,14 @@ def extraer_fechas():
 def guardar_bd():
     
     conn = sqlite3.connect('carnaval.db')
-    conn.text_factory = str  # para evitar problemas con el conjunto de caracteres que maneja la BD
+    conn.text_factory = str 
     conn.execute("DELETE FROM LETRAS WHERE FECHA=" + "2018")
      
     
     l=extraer_fechas()
     for i in l:    
-        print i
         
         rPrincipal = urllib.urlopen('http://letrasdcarnaval.blogspot.com.es/search/label/'+i).read()
-#    rPrincipal = urllib.urlopen('http://letrasdcarnaval.blogspot.com.es/search/label/2018').read()
         
         soupPrincipal = BeautifulSoup(rPrincipal,"html.parser")
         soup2 = soupPrincipal.find(id="blog-pager-older-link")
@@ -59,21 +57,19 @@ def guardar_bd():
                         
                 if datos != [] and (len(datos))>=5:
                             
-                    #GRUPO
                     grupo=""
-                    if len(datos[0].get_text())<2:#la linea puede estar vacia                         
+                    if len(datos[0].get_text())<2:                    
                         grupo=datos[1].get_text().strip()
                     else:
                         grupo=datos[0].get_text().strip()   
                             
-                    #AUTOR 
                     autor=""
                     x =1;
                         
                                 
-                    while len(datos[x].get_text())<6 :#elimina las lineas vacias o con años
+                    while len(datos[x].get_text())<6 :
                         x=x+1
-                    while len(datos[x].get_text()) > 3 and len(datos[x].get_text().strip())<75:#cuando hay una linea en blanco o empieza enseguida la letra, para
+                    while len(datos[x].get_text()) > 3 and len(datos[x].get_text().strip())<75:
                         if len(datos[x].get_text())<6 or (datos[x].get_text() is 'Vídeo aquí'):
                             autor = autor.strip()
                         elif autor== "":
@@ -90,7 +86,6 @@ def guardar_bd():
                     autor= autor.replace(video.decode('utf-8'), "").strip()
                             
                             
-                    #LETRAS
                     datos2 = j.select('[style*="text-align: justify;"]' and '[style*="text-align: left;"]' and '[style*="color: white;"]' )
                     letra = ""
                     
@@ -102,7 +97,6 @@ def guardar_bd():
                             letra = letra+" "+x.get_text().strip()
                             
                     if len(letra) is not 0:
-                            #Con esto quitamos las tildes que pueden resultar molestas a la hora de hacer el procesado de textos
                             s = ''.join((c for c in unicodedata.normalize('NFD',unicode(letra)) if unicodedata.category(c) != 'Mn'))
                     
                             conn.execute("""INSERT INTO LETRAS (FECHA, AUTOR, GRUPO, LETRA) VALUES (?,?,?,?)""",
@@ -117,7 +111,6 @@ def guardar_bd():
     
 def populateDatabaseLetras():
     guardar_bd()
-    print("Finished database population")
     
 if __name__ == '__main__':
     populateDatabaseLetras()

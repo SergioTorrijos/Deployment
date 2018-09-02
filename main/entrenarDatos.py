@@ -17,7 +17,7 @@ import sqlite3
 
 tokenizer = RegexpTokenizer(r'\w+')
 stopword_set = set(stopwords.words('spanish'))
-#This function does all cleaning of data using two objects above
+
 def nlp_clean(data):
     new_data = []
     for d in data:
@@ -27,12 +27,11 @@ def nlp_clean(data):
         new_data.append(dlist)
     return new_data
 
-#Método principal del Doc2Vec
 def guardarEntrenamiento(fechaPasada):
     
     
     conn = sqlite3.connect('carnaval.db')
-    conn.text_factory = str  # para evitar problemas con el conjunto de caracteres que maneja la BD
+    conn.text_factory = str  
     conn.execute('''DROP TABLE IF EXISTS ENTRENAMIENTO''')
      
     conn.execute('''CREATE TABLE ENTRENAMIENTO
@@ -55,9 +54,7 @@ def guardarEntrenamiento(fechaPasada):
 		
         for j in cursorLetras.fetchall():
             
-			if suma != 19:
-				print suma
-				print j[0]
+			if suma != 15:
 				
 				
 				suma+=1
@@ -73,70 +70,47 @@ def guardarEntrenamiento(fechaPasada):
 				
 				it = LabeledLineSentence(letras_fin, letrasNoticias)
 				
-		#         model = gensim.models.Doc2Vec( vector_size=1, min_count=1, alpha=0.05, min_alpha=0.00025, dm=2)
 				model = gensim.models.Doc2Vec(vector_size=15, window=2, min_count=1, workers=4)
 				model.build_vocab(it)
 				
 				iterator_size=2
-				#training of model
 				for epoch in range(iterator_size):
-					print 'iteration '+str(epoch+1)
 					model.train(it,total_examples=model.corpus_count,epochs=model.epochs)
 					model.alpha -= 0.00002
 					model.min_alpha = model.alpha
-				 
-				#saving the created model
 				model.save('doc2vec.model')
-				
-				
-				#loading the model
 				d2v_model = gensim.models.doc2vec.Doc2Vec.load('doc2vec.model')
 				model.delete_temporary_training_data(keep_doctags_vectors=True, keep_inference=True)
-				#start testing
-				#to get most similar document with similarity scores using document-index
 				similar_doc = d2v_model.docvecs.most_similar(0) 
-				print similar_doc
 				for index in similar_doc:
 					
-					noticiasSeleccionadas.append(index)#Noticias con vectores
+					noticiasSeleccionadas.append(index)
 					
-					if index[0] in noticiasSeleccionadasNombre: #Se comprueba si se repite alguna noticia, si no se repite se añade
-						if index[0] not in noticiasRepetidas: #Vemos que noticias se repiten tras el entrenamiento, si no esta en noticias repetidas se añade
+					if index[0] in noticiasSeleccionadasNombre: 
+						if index[0] not in noticiasRepetidas:
 							noticiasRepetidas.append(index[0])
 							 
 						
-						#print noticiasRepetidas
 					noticiasSeleccionadasNombre.append(index[0])
 				
-				#print "NOTICIA REPETIDA !!!!!"
-				#print noticiasRepetidas
-            
             
         controlRepetidasFin =[]
-        for index2 in noticiasRepetidas: #Vemos cuantas veces se repite las noticias
+        for index2 in noticiasRepetidas: 
             numerito = noticiasSeleccionadasNombre.count(index2)
             if index2 not in controlRepetidasFin:
                 controlRepetidasFin.append(index2)
                 noticiasRepetidasFin.append([index2,numerito])
-        #print noticiasSeleccionadas
         noticiasSeleccionadas.sort(key=lambda x: x[1], reverse=True)
         noticiasRepetidasFin.sort(key=lambda x: x[1], reverse=True)
-        #print noticiasSeleccionadas
-        #print noticiasSeleccionadasNombre
-        
-        #print "SOLO LOS PRIMEROS 5"
-        #print noticiasSeleccionadas[:(5-len(noticiasRepetidas))] #Se cogen las primeras 5 noticias más destacadas
                 
-        if len(noticiasRepetidasFin) < 5: #Si hay más de 5 noticias repetidas, cogemos las noticias que más se repitan.
+        if len(noticiasRepetidasFin) < 5:
             
             
             fin = noticiasSeleccionadas[:(5-len(noticiasRepetidasFin))]
-            #Noticias que se repiten junto a sus repeticiones
             for f in noticiasRepetidasFin:
                 conn.execute("""INSERT INTO ENTRENAMIENTO (FECHA,NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?,?)""",
                             (fechaPasada,f[0],f[1],"0"))
                 
-            #Noticias que no se repiten junto a su vector
             for fi in fin:
                 conn.execute("""INSERT INTO ENTRENAMIENTO (FECHA,NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?,?)""",
                             (fechaPasada,fi[0],"0",fi[1]))
@@ -147,7 +121,6 @@ def guardarEntrenamiento(fechaPasada):
             
             
         else:
-            #Noticias repetidas junto a las veces que se repite
             for f in noticiasRepetidasFin:
                 conn.execute("""INSERT INTO ENTRENAMIENTO (FECHA,NOTICIA, REPETICIONES, VECTOR) VALUES (?,?,?,?)""",
                             (fechaPasada,f[0],f[1],"0"))

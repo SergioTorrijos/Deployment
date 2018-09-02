@@ -28,20 +28,18 @@ def extraer_fechas():
 def guardar_bd():
     
     conn = sqlite3.connect('carnaval.db')
-    conn.text_factory = str  # para evitar problemas con el conjunto de caracteres que maneja la BD
+    conn.text_factory = str  
     conn.execute("DELETE FROM NOTICIAS WHERE FECHA=" + "2018")
      
     
     l=extraer_fechas()
-    for i in l:    
-        print i
+    for i in l: 
         
         rPrincipal = urllib.urlopen('https://es.wikipedia.org/wiki/'+i).read()
         
         soupPrincipal = BeautifulSoup(rPrincipal,"html.parser")
         inicio = soupPrincipal.find(class_='mw-parser-output')
-        #Esto se hace porque hay años que no toman bien el valor decompose y otros años que lo necesitan para que las noticias
-        #no tomen valores extraños
+       
         try:
             inicio.find(class_='listaref').decompose()
         except:
@@ -60,7 +58,6 @@ def guardar_bd():
     
 def populateDatabaseNoticias():
     guardar_bd()
-    print("Finished database population")
     
 if __name__ == '__main__':
     populateDatabaseNoticias()

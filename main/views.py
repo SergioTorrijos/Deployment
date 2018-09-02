@@ -8,7 +8,6 @@ import sqlite3
 from django.template.context import RequestContext
 from botocore.vendored.requests.api import request
     
-#  CONJUNTO DE VISTAS
 
 def index(request): 
     return render_to_response('index.html')
