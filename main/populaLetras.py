@@ -47,6 +47,7 @@ def guardar_bd():
         rPrincipal = urllib.urlopen('http://letrasdcarnaval.blogspot.com.es/search/label/'+i).read()
 #    rPrincipal = urllib.urlopen('http://letrasdcarnaval.blogspot.com.es/search/label/2018').read()
         
+		
 		soupPrincipal = BeautifulSoup(rPrincipal,"html.parser")
 		soup2 = soupPrincipal.find(id="blog-pager-older-link")
 		principal = 0
@@ -113,7 +114,7 @@ def guardar_bd():
 					
 							conn.execute("""INSERT INTO LETRAS (FECHA, AUTOR, GRUPO, LETRA) VALUES (?,?,?,?)""",
 											(i,unicode(autor),unicode(grupo),unicode(s)))
-						
+							
     conn.commit()
     conn.close()
     
