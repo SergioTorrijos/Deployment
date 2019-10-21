@@ -17,7 +17,7 @@ gunicorn==19.9.0
 idna==2.7
 include==0.2.1
 jmespath==0.9.3
-nltk==3.3
+nltk==3.4.5
 numpy==1.13.3
 olefile==0.44
 Pattern==2.6
