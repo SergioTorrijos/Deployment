@@ -22,7 +22,7 @@ numpy==1.13.3
 olefile==0.44
 Pattern==2.6
 patterns==0.3
-Pillow==4.3.0
+Pillow==8.3.2
 psycopg2==2.7.5
 python-dateutil==2.7.3
 requests==2.19.1
